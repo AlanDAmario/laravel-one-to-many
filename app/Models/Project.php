@@ -15,4 +15,10 @@ class Project extends Model
         'slug',
         'cover_image'
     ];
+
+    public function type()
+    {
+        // TYPE HA SOLO PROJECT ASSOCIATO
+        return $this->belongsTo(Type::class);
+    }
 }

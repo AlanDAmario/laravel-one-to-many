@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     use HasFactory;
+
+   public function projects()
+   {
+    // UN TYPE POTRà AVERE PIù PROJECTS ASSOCIATI PERCIò 'PROJECTS()'
+     return $this->hasMany(Project::class);
+   }
 }

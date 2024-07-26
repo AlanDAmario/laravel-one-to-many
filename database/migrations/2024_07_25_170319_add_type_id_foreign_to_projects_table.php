@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             //Creazione del campo
-            $table->unsignedBigInteger('type_id');
+            $table->unsignedBigInteger('type_id')->nullable()->after('id');
 
             //Definizione della chiave esterna
             $table->foreign('type_id')
                 ->references('id')
-                ->on('types');
+                ->on('types')
+                ->nullOnDelete();
+
 
             //Aggiunta modalità meno verbosa
             //$table->foreign('type_id')->constrained();
