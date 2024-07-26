@@ -44,12 +44,17 @@ class ProjectController extends Controller
         $data['slug'] = Str::of($data['title'])->slug('-');
 
         //GESTIONE IMMAGINE
-        $img_path = $request->hasFile('cover_image') ? Storage::put('uploads', $data['cover_image']) : NULL;
+        $img_path = $request->hasFile('cover_image') ? $request->file('cover_image')->store('cover_images') : NULL;
+
 
         // Salva il progetto nel database
         $project = new Project();
 
+        //Questa riga di codice assegna direttamente il percorso dell'immagine alla proprietà cover_image del modello Project. È una parte della logica di aggiornamento dell'oggetto modello prima di salvarlo nel database.
         $project->cover_image = $img_path; //aggiunge il path dell'immagine al progetto
+
+        //Questa riga di codice aggiunge o aggiorna l'elemento cover_image nell'array $data.
+        $data['cover_image'] = $img_path;
 
         //è un metodo conveniente e sicuro per assegnare valori agli attributi di un modello in Laravel, rispettando le restrizioni definite dalla proprietà $fillable.
         $project->fill($data);
@@ -85,6 +90,7 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $data = $request->validated();
+
         // $slug = Str::of($data['title'])->slug('-');
         // VERSIONE SLUGGIZATA DEL TITOLO
         $data['slug'] = Str::of($data['title'])->slug('-');
@@ -98,10 +104,15 @@ class ProjectController extends Controller
 
             // Salva la nuova immagine
             $data['cover_image'] = $request->file('cover_image')->store('cover_images');
+            $project->cover_image = $data['cover_image'];
+            $project->save();
         } else {
             // Mantieni il vecchio percorso dell'immagine se non viene caricata una nuova immagine
             $data['cover_image'] = $project->cover_image;
         }
+
+
+
 
         // Aggiorna i dati del progetto nel database
         $project->update($data);
