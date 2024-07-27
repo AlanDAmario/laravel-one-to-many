@@ -51,15 +51,28 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ Auth::check() ? route('admin.welcome') : url('/') }}">{{ __('Home') }}</a>
-                        </li>
+
                         @auth
-                            <li>
-                                <a class="nav-link" href="{{ route('admin.projects.index') }}"> {{ __('Projects') }}</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.projects.index') }}">{{ __('Projects') }}</a>
                             </li>
-                        @endauth
+                           
+                                <!-- Dropdown per le Categorie -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="typeDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ __('Type') }}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="typeDropdown">
+                                        @foreach ($types as $type)
+                                            <a class="dropdown-item"
+                                                href="{{ route('admin.projects.index', ['type_id' => $type->id]) }}">
+                                                {{ $type->title }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </li>
+                            @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->

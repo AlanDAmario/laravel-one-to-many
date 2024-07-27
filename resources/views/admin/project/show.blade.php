@@ -7,13 +7,21 @@
             <div class="col-6 col-sm-8 col-lg-6">
                 {{-- SE L IMMAGINE ESISTE ALLORA L STAMPIAMO --}}
                 @if ($project->cover_image)
-                    <img src="{{asset('storage/' . $project->cover_image)}}" class="d-block mx-lg-auto img-fluid" alt="" width="700" height="500"
-                        loading="lazy">
+                    <img src="{{ asset('storage/' . $project->cover_image) }}" class="d-block mx-lg-auto img-fluid"
+                        alt="" width="700" height="500" loading="lazy">
+                @else
+                    <div class="text-center">
+                        <p>Immagine non selezionata </p>
+
+                    </div>
                 @endif
             </div>
             <div class="col-lg-6">
                 <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ $project->title }}</h1>
-                <p class="lead">{{ $project->description }}</p>
+                <p class="lead py-4">{{ $project->description }}</p>
+                <hr>
+                <p class="py-4">Tipologia: {{ $project->type ? $project->type->title : 'Nessuna tipologia assegnata' }}
+                </p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-5">
                     <a class="btn btn-primary px-4 me-md-2" href="{{ route('admin.projects.index') }}">Torna alla lista dei
                         post</a>

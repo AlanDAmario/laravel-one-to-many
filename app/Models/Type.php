@@ -9,6 +9,7 @@ class Type extends Model
 {
     use HasFactory;
 
+    
    public function projects()
    {
     // UN TYPE POTRà AVERE PIù PROJECTS ASSOCIATI PERCIò 'PROJECTS()'

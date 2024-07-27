@@ -36,8 +36,10 @@ class TypeSeeder extends Seeder
             //creare un instance del modello, NEWTYPE ASSEGNATO PER NON ANDARE IN CONFLITTO CON I NOMI
             $newType = new Type();
 
-            $newType->type = $type;
-            $newType->slug = Str::of($newType->type)->slug();
+            $newType->title = $type;
+            $newType->slug = Str::of($type)->slug();
+
+            
             //salvare il record nella tabella
             $newType->save();
         }

@@ -24,10 +24,11 @@ class StoreProjectRequest extends FormRequest
     {
         //aggiungere le regole di validazione per il form
         return [
-            'title' => ['required','string','min:5','max:60'],
-            'description' => ['nullable', 'string','min:10','max:500'],
-            'cover_image' => ['nullable', 'image', 'max:2048']
-            
+            'title' => ['required', 'string', 'min:5', 'max:60'],
+            'description' => ['nullable', 'string', 'min:10', 'max:500'],
+            'cover_image' => ['nullable', 'image', 'max:2048'],
+            'type_id' => ['nullable', 'exists:types,id']
+
         ];
     }
 }
