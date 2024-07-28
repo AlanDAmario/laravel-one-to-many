@@ -6,7 +6,15 @@
         @include('shared.errors')
         @include('shared.success')
         @if ($projects->isEmpty())
-            <p>No projects found.</p>
+            <div class="mt-4">
+                <span class="me-5">Nessun progetto trovato.</span>
+                <span class="ms-5"> Crea un nuovo progetto qui </span>
+                <a href="{{ route('admin.projects.create') }}" as="button"
+                    class="btn btn-sm btn-outline-secondary  border-0" data-bs-toggle="tooltip" title="Nuovo Progetto"><i
+                        class="fa-solid fa-plus"></i></a>
+
+
+            </div>
         @else
             <table class="table table-hover table-bordered ">
                 <thead>
@@ -26,6 +34,7 @@
                         </th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <!-- Verifica se ci sono progetti e mostra il messaggio se l'elenco è vuoto -->
 
@@ -56,7 +65,7 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table>
         @endif
+        </table>
     </div>
 @endsection

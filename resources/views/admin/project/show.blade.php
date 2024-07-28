@@ -12,12 +12,11 @@
                 @else
                     <div class="text-center">
                         <p>Immagine non selezionata </p>
-
                     </div>
                 @endif
             </div>
             <div class="col-lg-6">
-                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ $project->title }}</h1>
+                <h1 class="display-5 fw-bold text-body-emphasis  mb-3">{{ $project->title }}</h1>
                 <p class="lead py-4">{{ $project->description }}</p>
                 <hr>
                 <p class="py-4">Tipologia: {{ $project->type ? $project->type->title : 'Nessuna tipologia assegnata' }}
